@@ -1,0 +1,9 @@
+#!/bin/sh
+exec 2>&1
+test -f /etc/default/avahi-daemon && . /etc/default/avahi-daemon
+DISABLE_TAG="/var/run/avahi-daemon/disabled-for-unicast-local"
+if [ -e $DISABLE_TAG -a "$AVAHI_DAEMON_DETECT_LOCAL" != "0" ]; then
+    # Disabled because of the existance of an unicast .local domain
+    sv d .
+fi;
+/usr/sbin/avahi-daemon

@@ -1,0 +1,8 @@
+#!/bin/sh
+ps aux | grep "getty tty" > /var/run/lightdm-test
+if [ -n "$(cat /var/run/lightdm-test | grep "grep getty tty" -v)" ]; then
+  rm /var/run/lightdm-test
+  sleep 2
+  exec /usr/sbin/lightdm
+fi
+rm /var/run/lightdm-test
