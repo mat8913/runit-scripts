@@ -1,3 +1,0 @@
-#!/bin/sh
-! type getty >/dev/null 2>&1 || exec chpst -P getty tty1
-exec getty 38400 tty1
