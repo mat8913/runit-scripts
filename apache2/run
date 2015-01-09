@@ -1,0 +1,6 @@
+#!/bin/sh
+source /etc/conf.d/apache2
+exec /usr/sbin/apache2 ${APACHE2_OPTS} \
+	-D NO_DETACH \
+	-f /etc/apache2/httpd.conf \
+	-d /usr/lib64/apache2/

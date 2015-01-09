@@ -1,0 +1,11 @@
+#!/bin/sh
+exec 2>&1
+if [ ! -d /var/run/postgresql ]; then
+	mkdir /var/run/postgresql
+fi
+
+chmod 0755 /var/run/postgresql
+chown postgres:postgres /var/run/postgresql
+
+source /etc/conf.d/postgresql-9.3
+exec chpst -u postgres /usr/bin/postgres -D $PGDATA --data-directory=$DATA_DIR
