@@ -1,0 +1,15 @@
+#!/usr/bin/env execlineb
+fdmove -c 2 1
+ip netns exec physical
+emptyenv -p
+openvpn --nobind
+ --config /root/pvpn/config.ovpn
+ --user nobody
+ --group nogroup
+ --auth-user-pass /root/pvpn/cred
+ --ifconfig-noexec
+ --route-noexec
+ --up       "/usr/bin/env chpst -e /etc/sv/pvpn/ns-script.envdir /etc/sv/pvpn/ns-script"
+ --route-up "/usr/bin/env chpst -e /etc/sv/pvpn/ns-script.envdir /etc/sv/pvpn/ns-script"
+ --remap-usr1 SIGTERM
+ --ping-exit 120

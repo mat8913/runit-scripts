@@ -1,0 +1,21 @@
+#!/usr/bin/env execlineb
+
+nsenter -t 1 -n -m
+importas -i script_type script_type
+
+ifelse { test "${script_type}" = up } {
+	multisubstitute {
+		importas -i dev dev
+		importas -i tun_mtu tun_mtu
+		importas -i ifconfig_local ifconfig_local
+		importas -i ifconfig_netmask ifconfig_netmask
+		importas -i ifconfig_broadcast ifconfig_broadcast
+	}
+	foreground { ip -n physical link set dev "${dev}" up mtu "${tun_mtu}" netns 1 }
+	ip -4 addr add dev "${dev}" local "${ifconfig_local}/${ifconfig_netmask}" broadcast "${ifconfig_broadcast}"
+} ifelse { test "${script_type}" = route-up } {
+	importas -i route_vpn_gateway route_vpn_gateway
+	ip -4 route add default via "${route_vpn_gateway}"
+}
+
+exit 1

@@ -1,0 +1,3 @@
+#!/usr/bin/env execlineb
+chpst -u log -U log
+svlogd -ttt /var/log/pvpn
