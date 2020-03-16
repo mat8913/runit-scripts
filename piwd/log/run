@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chpst -u log -U log svlogd -ttt /var/log/piwd
