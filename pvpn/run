@@ -9,7 +9,7 @@ openvpn --nobind
  --auth-user-pass /root/pvpn/cred
  --ifconfig-noexec
  --route-noexec
- --up       "/usr/bin/env chpst -e /etc/sv/pvpn/ns-script.envdir /etc/sv/pvpn/ns-script"
- --route-up "/usr/bin/env chpst -e /etc/sv/pvpn/ns-script.envdir /etc/sv/pvpn/ns-script"
+ --up       "/usr/bin/env chpst -e ./ns-script.envdir ./ns-script"
+ --route-up "/usr/bin/env chpst -e ./ns-script.envdir ./ns-script"
  --remap-usr1 SIGTERM
  --ping-exit 120
